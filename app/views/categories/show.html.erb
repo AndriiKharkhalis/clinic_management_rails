@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">Doctors in <%= @category.name %> department</h1>
+
+  <div class="row justify-content-center">
+    <% @doctors.each do |doctor| %>
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body">
+            <h4 class="card-title text-primary">Dr. <%= doctor.first_name %> <%= doctor.last_name %></h4>
+            <p class="text-muted mb-3"><i class="bi bi-telephone"></i> <%= doctor.phone %></p>
+            
+            <% slots = doctor.available_slots(Date.today) %>
+            <% display_date = slots.first %>
+
+            <% if display_date %>
+              <h6 class="border-top pt-3 mb-3 text-muted">
+                Available slots for <strong><%= display_date.strftime("%B %d") %></strong>:
+              </h6>
+              
+              <div class="d-flex flex-wrap gap-2">
+                <% slots.each do |slot| %>
+                  <%= button_to slot.strftime("%H:%M"), 
+                      category_doctor_appointments_path(@category, doctor, start_time: slot), 
+                      method: :post, 
+                      class: "btn btn-outline-primary btn-sm flex-fill",
+                      data: { turbo: false } %>
+                <% end %>
+              </div>
+            <% else %>
+              <p class="small text-danger border-top pt-2">No available slots for now.</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Select a Medical Category</h1>
+  <div class="list-group">
+    <% @categories.each do |category| %>
+      <%= link_to category_path(category), class: "list-group-item list-group-item-action d-flex justify-content-between align-items-center" do %>
+        <%= category.name %>
+        <span class="badge bg-primary rounded-pill"><%= category.doctors.count %> doctors</span>
+      <% end %>
+    <% end %>
+  </div>
+</div>
