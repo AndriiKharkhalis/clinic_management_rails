@@ -1,51 +1,62 @@
-# Clinic Management System (Ruby on Rails)
+# Clinic Management System (Ruby on Rails 8)
 
-A comprehensive clinic management application with three user roles: **Patient**, **Doctor**, and **Admin**. Built as a test project to demonstrate proficiency in Ruby on Rails, authentication, authorization, and automated testing.
+A production-ready clinic management application featuring a dynamic scheduling system and multi-role access control. This project demonstrates advanced Rails patterns, including Service Objects and RESTful API integration.
 
-## Live Demo
+## 🚀 Project Status
 
-- **URL:** [Link to your deployed app, e.g., on Render/Fly.io]
+- **GitHub:** [https://github.com/AndriiKharkhalis/clinic_management_rails](https://github.com/AndriiKharkhalis/clinic_management_rails)
+- **Deployment:** In progress (coming soon)
 - **Admin Access:** `admin@example.com` / `password`
 
-## Features
+## ✨ Key Features
 
-### Patient (User)
+### 👤 Patient (User)
 
-- **Authentication:** Sign up and log in using **Phone Number** and Password (via Devise).
-- **Profile:** Personal dashboard to view appointment history and doctor recommendations.
-- **Booking:** Browse doctors by categories and book appointments.
-- **Recommendations:** Receive medical advice from doctors after the appointment is closed.
+- **Smart Booking:** Choose specific 30-minute time slots. The system automatically hides past slots and occupied times.
+- **Dashboard:** Track appointment history and view doctor recommendations in real-time.
+- **Phone-based Auth:** Secure login using phone number and password.
 
-### Doctor
+### 👨‍⚕️ Doctor
 
-- **Profile:** View a list of patients who have booked an appointment.
-- **Workflow:** Leave a recommendation for a patient.
-- **Auto-Close:** Appointments automatically transition from `Open` to `Closed` status once a recommendation is submitted.
-- **Workload Limit:** A doctor can have a maximum of **10 open appointments** at a time.
+- **Appointment Management:** Real-time dashboard showing scheduled patients with precise time slots.
+- **Medical Workflow:** Submit recommendations which automatically transition appointments from `Open` to `Closed`.
+- **Capacity Control:** Built-in logic to limit active appointments (max 10) to prevent burnout.
 
-### Admin
+### 🔑 Admin (ActiveAdmin)
 
-- **Dashboard:** Full access to patients and doctors list via **ActiveAdmin**.
-- **Management:** Create, edit, and delete medical categories and doctor profiles.
-- **Assignment:** Assign doctors to specific medical categories (e.g., Cardiologist, Therapist).
+- **Operational Control:** Full CRUD for Doctors, Patients, and Categories.
+- **Appointment Management:** Ability to manually create and manage appointments with a custom Datetime Picker.
+- **Analytics:** View doctor availability slots directly from the admin panel.
 
-## Tech Stack
+## 🏗 Advanced Architecture
 
-- **Framework:** Ruby on Rails 8.x
-- **Database:** PostgreSQL
-- **Authentication:** Devise (Customized for Phone Number login)
-- **Authorization:** CanCanCan
-- **Admin Interface:** ActiveAdmin
-- **Frontend:** Bootstrap 5
-- **Storage:** Cloudinary / AWS S3 integration for images.
+- **Service Objects:** Business logic (Appointment Creation, Completion) is decoupled from controllers into dedicated services in `app/services`.
+- **Dynamic Scheduling Engine:** Custom logic for generating 30-minute availability slots with overlap prevention.
+- **API Layer:** RESTful JSON API for integration with mobile apps or external frontends.
 
-## Testing
+## 🛠 Tech Stack
 
-The project is covered with **RSpec** tests (Model, Request, and Feature specs):
+- **Backend:** Ruby on Rails 8, PostgreSQL.
+- **Architecture:** Service Object Pattern, REST API.
+- **Authentication:** Devise (Customized for Phone Number).
+- **Admin UI:** ActiveAdmin.
+- **Frontend:** Bootstrap 5 (Responsive Design).
+- **Testing:** RSpec, Capybara.
 
-- **Model:** Validates doctor's phone number format (Polish/UA format support).
-- **Request:** Verifies the successful creation of resources (e.g., Categories).
-- **Feature:** Simulates a full user journey: Doctor login -> Dashboard -> Leaving a recommendation -> Status update.
+## 📡 API Endpoints
+
+The system provides a base for decoupled architecture:
+
+- `GET /api/v1/doctors` - Returns a JSON list of all doctors with their categories.
+- `GET /api/v1/doctors/:id` - Returns detailed info about a specific doctor.
+
+## 🧪 Testing
+
+The project maintains high reliability with **RSpec** (Model, Request, and Feature specs):
+
+- **Model Specs:** Validation of PL phone formats.
+- **Request Specs:** Integration testing for resource creation.
+- **Feature Specs:** Full E2E scenarios (Doctor login -> Leave recommendation -> Status update).
 
 To run tests:
 
@@ -58,8 +69,8 @@ bundle exec rspec
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com
-   cd clinic_management
+   git clone https://github.com/AndriiKharkhalis/clinic_management_rails
+   cd clinic_management_rails
    ```
 
 2. **Install dependencies:**
@@ -77,6 +88,9 @@ bundle exec rspec
    ```
 
 4. **Run the server:**
+
    ```bash
    bin/rails s
    ```
+
+   The application will be available at [http://localhost:3000](http://localhost:3000)
