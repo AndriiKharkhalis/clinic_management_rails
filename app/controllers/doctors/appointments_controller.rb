@@ -2,8 +2,6 @@ module Doctors
   class AppointmentsController < ApplicationController
     before_action :authenticate_doctor!
 
-    module Appointments
-  class CompleteService
     def initialize(appointment, params)
       @appointment = appointment
       @params = params
