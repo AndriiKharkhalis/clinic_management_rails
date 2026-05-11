@@ -2,16 +2,15 @@ module Doctors
   class AppointmentsController < ApplicationController
     before_action :authenticate_doctor!
 
-    def initialize(appointment, params)
-      @appointment = appointment
-      @params = params
-    end
+    def update
+      @appointment = current_doctor.appointments.find(params[:id])
+      
+      result = Appointments::CompleteService.new(@appointment, appointment_params).call
 
-    def call
-      if @appointment.update(@params.merge(status: :closed))
-        { success: true }
+      if result[:success]
+        redirect_to doctor_profile_path, notice: "Recommendation saved and appointment closed."
       else
-        { success: false, message: @appointment.errors.full_messages.to_sentence }
+        redirect_to doctor_profile_path, alert: "Error: #{result[:message]}"
       end
     end
 

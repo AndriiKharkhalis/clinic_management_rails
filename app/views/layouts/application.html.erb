@@ -39,9 +39,26 @@
       </div>
     </nav>
 
-    <main class="container">
+    <main class="container mt-4">
+      <% if notice %>
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+          <i class="bi bi-check-circle-fill me-2"></i>
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+
       <%= yield %>
     </main>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
